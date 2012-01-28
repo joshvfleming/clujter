@@ -56,7 +56,7 @@
   "Calculates the central point of the given points."
   [nodes]
   (let [c (count nodes)]
-    (map #(float (/ % c)) (eval `(map + ~@nodes)))))
+    (map #(float (/ % c)) (apply map + nodes))))
 
 (defn k-cluster
   "Performs the k-means clustering on the vectors, and returns a map of
