@@ -8,8 +8,8 @@
   (let [reader (-> filename FileReader. BufferedReader.)
         lines (line-seq reader)
         read-line (fn [line]
-                    (vec (map #(Float/parseFloat %)
-                              (str/split (str/trim line) #"\s"))))
+                    (map #(Float/parseFloat %)
+                         (str/split (str/trim line) #"\s")))
         out (assoc {} :count
                    (Integer/parseInt (first lines)))]
     (assoc out :data
@@ -21,6 +21,6 @@
   (doseq [r results]
     (println (str "Cluster with centroid: " (first r)))
     (doseq [p (second r)]
-      (println (str p)))
+      (println (str (vec p))))
     (println "")))
           
