@@ -1,5 +1,5 @@
 (ns clujter.kmeans
-  (:require [clojure.contrib.math :as math]))
+  (:use [clujter.core]))
 
 (defn pick-random
   "Chooses a number of random vectors from the collection."
@@ -11,7 +11,7 @@
   [a b]
   (let [x-diff (- (nth a 0) (nth b 0))
         y-diff (- (nth a 1) (nth b 1))]
-    (math/sqrt (+ (Math/pow x-diff 2) (Math/pow y-diff 2)))))
+    (Math/sqrt (+ (Math/pow x-diff 2) (Math/pow y-diff 2)))))
 
 (defn nearest-centroid
   "Finds the nearest centroid to the vector."

@@ -1,13 +1,14 @@
 # clujter
 
-FIXME: write description
+Clujter is a holding project for implementations of unsupervised learning algorithms. I'm coding these currently for educational purposes only. All suggestions and criticisms are very welcome.
 
 ## Usage
 
-FIXME: write
+lein deps
+lein run resources/kmeans-data-1.txt
 
 ## License
 
-Copyright (C) 2011 FIXME
+Copyright (C) 2012 Josh Fleming
 
 Distributed under the Eclipse Public License, the same as Clojure.
