@@ -4,8 +4,8 @@ Clujter is a holding project for implementations of unsupervised learning algori
 
 ## Usage
 
-lein deps
-lein run resources/kmeans-data-1.txt
+    lein deps
+    lein run resources/kmeans-data-1.txt
 
 ## License
 
