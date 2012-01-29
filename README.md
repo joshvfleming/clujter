@@ -37,6 +37,6 @@ Output
 License
 -------
 
-Copyright (C) 2012 Josh Fleming
+Copyright &copy; 2012 Josh Fleming
 
 Distributed under the Eclipse Public License, the same as Clojure.
