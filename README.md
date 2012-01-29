@@ -1,6 +1,6 @@
 # clujter
 
-Clujter is a holding project for implementations of unsupervised learning algorithms. I'm coding these currently for learning  purposes only. All suggestions and criticisms are very welcome.
+Clujter is a holding project for implementations of unsupervised learning algorithms. All suggestions and criticisms are very welcome.
 
 ## Usage
 
