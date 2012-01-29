@@ -2,6 +2,10 @@
 
 Clujter is a holding project for implementations of unsupervised learning algorithms. All suggestions and criticisms are very welcome.
 
+## Dependencies
+
+To build Clujter, you must first have [Leiningen](https://github.com/technomancy/leiningen) installed.
+
 ## Usage
 
     lein deps
