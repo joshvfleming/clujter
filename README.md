@@ -1,17 +1,21 @@
-# clujter
+clujter
+=======
 
 Clujter is a holding project for implementations of unsupervised learning algorithms written in [Clojure](http://clojure.org). All suggestions and criticisms are very welcome.
 
-## Dependencies
+Dependencies
+------------
 
 To build Clujter, you must first have [Leiningen](https://github.com/technomancy/leiningen) installed.
 
-## Usage
+Usage
+-----
 
     lein deps
     lein run resources/kmeans-data-1.txt
 
-## License
+License
+-------
 
 Copyright (C) 2012 Josh Fleming
 
