@@ -9,23 +9,22 @@
 (defn get-distance
   "Calculates Euclidean distance between two points."
   [a b]
-  (let [x-diff (- (nth a 0) (nth b 0))
-        y-diff (- (nth a 1) (nth b 1))]
+  (let [x-diff (- (first a) (first b))
+        y-diff (- (second a) (second b))]
     (Math/sqrt (+ (Math/pow x-diff 2) (Math/pow y-diff 2)))))
 
 (defn nearest-centroid
   "Finds the nearest centroid to the vector."
   [vector centroids]
   (loop [remaining centroids
-         nearest nil
-         nearest-dist 0]
+         nearest nil]
       (if (empty? remaining)
-        (vec nearest)
+        (nearest :data)
         (let [centroid (first remaining)
               dist (get-distance vector centroid)]
-          (if (or (nil? nearest) (< dist nearest-dist))
-            (recur (rest remaining) centroid dist)
-            (recur (rest remaining) nearest nearest-dist))))))
+          (if (or (nil? nearest) (< dist (nearest :distance)))
+            (recur (rest remaining) {:data centroid :distance dist})
+            (recur (rest remaining) nearest))))))
 
 (defn group-with-nearest-centroid
   "Returns a map containing points grouped with their nearest centroid."
@@ -37,7 +36,7 @@
       (let [vector (first remaining)
             nearest (nearest-centroid vector centroids)
             new-clusters (assoc clusters nearest
-                                (vec (conj (clusters nearest) vector)))]
+                                (conj (clusters nearest) vector))]
         (recur (rest remaining) new-clusters)))))
 
 (defn calculate-centroid
@@ -52,7 +51,7 @@
   [vectors cluster-count]
   (loop [centroids (pick-random vectors cluster-count)]
     (let [clusters (group-with-nearest-centroid vectors centroids)
-          new-centroids (map #(calculate-centroid (last %)) clusters)]
+          new-centroids (map #(calculate-centroid (second %)) clusters)]
       (if (= (set centroids) (set new-centroids))
         clusters
         (recur new-centroids)))))

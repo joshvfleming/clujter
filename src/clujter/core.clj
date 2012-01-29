@@ -19,7 +19,7 @@
   "Prints the results of a clustering run."
   [results]
   (doseq [r results]
-    (println (str "Cluster with centroid: " (first r)))
+    (println (str "Cluster with centroid: " (vec (first r))))
     (doseq [p (second r)]
       (println (str (vec p))))
     (println "")))
