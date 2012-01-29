@@ -1,7 +1,7 @@
 clujter
 =======
 
-Clujter is a holding project for implementations of unsupervised learning algorithms written in [Clojure](http://clojure.org). All suggestions and criticisms are very welcome.
+Clujter is a holding project for implementations of machine learning algorithms written in [Clojure](http://clojure.org). All suggestions and criticisms are very welcome.
 
 Dependencies
 ------------
