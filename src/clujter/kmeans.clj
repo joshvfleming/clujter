@@ -16,15 +16,11 @@
 (defn nearest-centroid
   "Finds the nearest centroid to the vector."
   [vector centroids]
-  (loop [remaining centroids
-         nearest nil]
-      (if (empty? remaining)
-        (nearest :data)
-        (let [centroid (first remaining)
-              dist (get-distance vector centroid)]
-          (if (or (nil? nearest) (< dist (nearest :distance)))
-            (recur (rest remaining) {:data centroid :distance dist})
-            (recur (rest remaining) nearest))))))
+  ((apply min-key :distance
+          (for [c centroids]
+            {:distance (get-distance vector c)
+             :centroid c}))
+   :centroid))
 
 (defn group-with-nearest-centroid
   "Returns a map containing points grouped with their nearest centroid."
