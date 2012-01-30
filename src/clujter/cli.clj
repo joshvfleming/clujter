@@ -1,5 +1,6 @@
 (ns clujter.cli
-  (:use [clujter core kmeans])
+  (:use [clujter.core :only (read-data-file print-results)]
+        [clujter.k-means :only (k-cluster)])
   (:gen-class))
 
 (defn -main

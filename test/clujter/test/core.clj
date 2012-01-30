@@ -1,5 +1,5 @@
 (ns clujter.test.core
-  (:use [clujter core kmeans])
+  (:use [clujter core k-means])
   (:use [clojure.test]))
 
 (def ^:dynamic *test-data-1* [[1 1] [22 15] [1 2] [23 25] [2 4]])

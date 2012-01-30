@@ -1,5 +1,4 @@
-(ns clujter.kmeans
-  (:use [clujter.core]))
+(ns clujter.k-means)
 
 (defn pick-random
   "Chooses a number of random vectors from the collection."
