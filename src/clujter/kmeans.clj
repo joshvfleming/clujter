@@ -16,30 +16,20 @@
 (defn nearest-centroid
   "Finds the nearest centroid to the vector."
   [vector centroids]
-  ((apply min-key :distance
-          (for [c centroids]
-            {:distance (get-distance vector c)
-             :centroid c}))
-   :centroid))
+  (apply min-key
+         #(get-distance vector %)
+         centroids))
 
 (defn group-with-nearest-centroid
   "Returns a map containing points grouped with their nearest centroid."
   [vectors centroids]
-  (loop [remaining vectors
-         clusters {}]
-    (if (empty? remaining)
-      clusters
-      (let [vector (first remaining)
-            nearest (nearest-centroid vector centroids)
-            new-clusters (assoc clusters nearest
-                                (conj (clusters nearest) vector))]
-        (recur (rest remaining) new-clusters)))))
+  (group-by #(nearest-centroid % centroids) vectors))
 
 (defn calculate-centroid
   "Calculates the central point of the given points."
-  [nodes]
-  (let [c (count nodes)]
-    (map #(float (/ % c)) (apply map + nodes))))
+  [vectors]
+  (let [c (count vectors)]
+    (map #(float (/ % c)) (apply map + vectors))))
 
 (defn k-cluster
   "Performs the k-means clustering on the vectors, and returns a map of
