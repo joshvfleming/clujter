@@ -8,9 +8,8 @@
 (defn get-distance
   "Calculates Euclidean distance between two points."
   [a b]
-  (let [x-diff (- (first a) (first b))
-        y-diff (- (second a) (second b))]
-    (Math/sqrt (+ (Math/pow x-diff 2) (Math/pow y-diff 2)))))
+  (let [diffs (map #(apply - %) (partition 2 (interleave a b)))]
+    (Math/sqrt (reduce + (map #(Math/pow % 2) diffs)))))
 
 (defn nearest-centroid
   "Finds the nearest centroid to the vector."
