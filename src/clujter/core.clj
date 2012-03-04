@@ -8,22 +8,23 @@
   (take c (shuffle vectors)))
 
 (defn euclidean-distance
-  "Calculates Euclidean distance between two points."
+  "Calculates Euclidean distance between vectors."
   [& vectors]
   (let [diffs (apply map - vectors)]
     (Math/sqrt (reduce + (map #(Math/pow % 2) diffs)))))
 
 (defn dot-product
-  "Finds the dot product of two vectors."
+  "Finds the dot product of the vectors."
   [& vectors]
   (reduce + (apply map * vectors)))
 
-(defn pearson-similarity
+(defn pearson-coefficient
   "Calculates the Pearson similarity between two points."
   [a b]
-  (let [s (float (/ (dot-product a b) (count a)))]
-    (println s)
-    s))
+  (let [n (count a)]
+    (/ (- (dot-product a b) (/ (* (reduce + a) (reduce + b)) n))
+       (Math/sqrt (* (- (dot-product a a) (/ (Math/pow (reduce + a) 2) n))
+                     (- (dot-product b b) (/ (Math/pow (reduce + b) 2) n)))))))
 
 (defn read-data-file
   "Reads a data file, returning an entity count and data points."
