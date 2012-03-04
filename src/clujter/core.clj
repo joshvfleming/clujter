@@ -2,6 +2,29 @@
   (:require [clojure.string :as str])
   (:import [java.io BufferedReader FileReader]))
 
+(defn pick-random
+  "Chooses a number of random vectors from the collection."
+  [vectors c]
+  (take c (shuffle vectors)))
+
+(defn euclidean-distance
+  "Calculates Euclidean distance between two points."
+  [& vectors]
+  (let [diffs (apply map - vectors)]
+    (Math/sqrt (reduce + (map #(Math/pow % 2) diffs)))))
+
+(defn dot-product
+  "Finds the dot product of two vectors."
+  [& vectors]
+  (reduce + (apply map * vectors)))
+
+(defn pearson-similarity
+  "Calculates the Pearson similarity between two points."
+  [a b]
+  (let [s (float (/ (dot-product a b) (count a)))]
+    (println s)
+    s))
+
 (defn read-data-file
   "Reads a data file, returning an entity count and data points."
   [filename]

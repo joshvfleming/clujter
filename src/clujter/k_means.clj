@@ -1,21 +1,11 @@
-(ns clujter.k-means)
-
-(defn pick-random
-  "Chooses a number of random vectors from the collection."
-  [vectors c]
-  (take c (shuffle vectors)))
-
-(defn get-distance
-  "Calculates Euclidean distance between two points."
-  [a b]
-  (let [diffs (map #(apply - %) (partition 2 (interleave a b)))]
-    (Math/sqrt (reduce + (map #(Math/pow % 2) diffs)))))
+(ns clujter.k-means
+  (:use [clujter.core]))
 
 (defn nearest-centroid
   "Finds the nearest centroid to the vector."
   [vector centroids]
   (apply min-key
-         #(get-distance vector %)
+         #(euclidean-distance vector %)
          centroids))
 
 (defn group-with-nearest-centroid
