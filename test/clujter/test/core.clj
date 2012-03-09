@@ -1,6 +1,6 @@
 (ns clujter.test.core
   (:use [clujter core k-means])
-  (:use [clojure.test]))
+  (:use [midje.sweet]))
 
 (def ^:dynamic *test-data-1* [[1 1] [22 15] [1 2] [23 25] [2 4]])
 (def ^:dynamic *test-data-1-clustered*
@@ -11,11 +11,11 @@
   [clusters]
   (set (map #(set (last %)) clusters)))
 
-(defn clusters-equal
+(defn clusters-equal?
   [c1 c2]
   (= (point-set c1) (point-set c2)))
 
-(deftest k-cluster-test
+(facts "k-cluster-test"
   (let [clusters (k-cluster *test-data-1* 2)]
-    (is (= (count clusters) 2))
-    (is (clusters-equal *test-data-1-clustered* clusters))))
+    (count clusters) => 2
+    clusters => #(clusters-equal? % *test-data-1-clustered*)))
