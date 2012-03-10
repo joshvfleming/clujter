@@ -19,12 +19,23 @@
   (reduce + (apply map * vectors)))
 
 (defn pearson-coefficient
-  "Calculates the Pearson similarity between two points."
-  [a b]
-  (let [n (count a)]
-    (/ (- (dot-product a b) (/ (* (reduce + a) (reduce + b)) n))
-       (Math/sqrt (* (- (dot-product a a) (/ (Math/pow (reduce + a) 2) n))
-                     (- (dot-product b b) (/ (Math/pow (reduce + b) 2) n)))))))
+  "Calculates the Pearson correlation coefficient for the vectors. Based on the
+implementation from _Programming Collective Intelligence_, by Toby Segaran."
+  [& vectors]
+  (let [n (count (first vectors))
+        sums (map #(reduce + %) vectors)
+        sum-sqs (map (fn [v]
+                       (reduce + (map #(Math/pow % 2) v)))
+                     vectors)
+        p-sum (reduce + (apply map * vectors))
+        num (- p-sum (/ (reduce * sums) n))
+        den (Math/sqrt
+             (reduce * (map (fn [[sum sum-sq]]
+                              (- sum-sq (/ (Math/pow sum 2) n)))
+                            (partition 2 (interleave sums sum-sqs)))))]
+    (if (zero? den)
+      0
+      (/ num den))))
 
 (defn read-data-file
   "Reads a data file, returning an entity count and data points."
