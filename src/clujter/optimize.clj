@@ -17,8 +17,8 @@
 (defn sigmoid
   "Sigmoid function."
   [x]
-  (let [f (fn [t] (/ 1 (+ 1 (Math/exp (- x)))))
-        matrix-f (fn [t] (div 1 (plus 1 (exp (mult x -1)))))]
+  (let [f (fn [t] (/ 1 (+ 1 (Math/exp (- t)))))
+        matrix-f (fn [t] (div 1 (plus 1 (exp (mult t -1)))))]
     (cond (matrix? x) (matrix-f x)
           (coll? x) (map f x)
           :else (f x))))
