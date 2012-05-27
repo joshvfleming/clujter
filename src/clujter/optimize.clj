@@ -31,4 +31,16 @@
 (defn nn-cost
   "Simple neural network cost function."
   [X y theta lambda labels]
-  true)
+  (let [m (count labels)
+        a2 (sigmoid (mmult X (trans (first theta))))
+        a2 (bind-columns (matrix (take (nrow a2) (repeat 1))) a2)
+        a3 (sigmoid (mmult a2 (trans (second theta))))
+        J-f (fn [J c]
+              (let [yc (matrix (matrix-map #(if (= % (float c)) 1 0) y))
+                    hc (trans (sel a3 :rows c))
+                    jc (sum (minus
+                             (mult (minus yc) (log hc))
+                             (mult (minus 1 yc) (log (minus 1 hc)))))]
+                (+ J jc)))
+        J (/ (reduce J-f 0 labels) m)]
+    J))
